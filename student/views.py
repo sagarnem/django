@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from student.models import BroadwayStudent, StudentClass
-from django.http import HttpResponse
+from student.forms import StudentClassForm
 # Create your views here.
 
 def fetch_student(request):
@@ -21,3 +21,20 @@ def featch_class(request):
                 "data":b
         }
         return render(request, 'class/index.html', context)
+
+def create_class(request):
+       form = StudentClassForm
+       if request.method=='POST':
+               form= StudentClassForm(request.POST)
+               if form.is_valid():
+                       form.save()
+                       return redirect('/')
+               else:
+                       print(form.errors)
+
+
+       context = {
+        "form": form
+        }
+       
+       return render(request, 'class/create.html', context)

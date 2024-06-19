@@ -5,6 +5,7 @@ from django.db import models
 class StudentClass(models.Model):
     name = models.CharField(verbose_name="Class name", max_length=30, blank=False, null=True)
     section = models.CharField(verbose_name="class Section", max_length=40)
+    image = models.ImageField(upload_to='studentclass/', null=True, blank=True)
     status =  models.BooleanField(default=False)
     class_type = models.CharField(verbose_name="class type", max_length=10, null=True, blank=True)
     class_link = models.URLField(null=True, blank=True)

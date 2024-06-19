@@ -30,7 +30,7 @@ tr:nth-child(even) {
     <th>Phone</th>
     <th>Email</th>
     <th>Class</th>
-
+    <th>TEacher</th>
   </tr>
   {% for i in data %}
   <tr>
@@ -39,6 +39,7 @@ tr:nth-child(even) {
     <td>{{i.phone}}</td>
     <td>{{i.email}}</td>
     <td>{{i.student_class.name}}</td>
+    <td>{{i.BroadwayTeacher.name}}</td>
   </tr>
   {% endfor %}
   
