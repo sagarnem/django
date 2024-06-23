@@ -21,29 +21,31 @@ tr:nth-child(even) {
 </head>
 <body>
 
-    {{data}}
-
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Address</th>
-    <th>Phone</th>
-    <th>Email</th>
-    <th>Class</th>
-    <th>TEacher</th>
-  </tr>
-  {% for i in data %}
-  <tr>
-    <td>{{i.name}}</td>
-    <td>{{i.address}}</td>
-    <td>{{i.phone}}</td>
-    <td>{{i.email}}</td>
-    <td>{{i.student_class.name}}</td>
-    <td>{{i.BroadwayTeacher.name}}</td>
-  </tr>
-  {% endfor %}
-  
-</table>
+  <a href="{% url 'create-student-list' %}">Create Class</a>
+    <table>
+      <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Address</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>classs</th>
+          <th>created_at</th>
+          <th>Action</th>
+      </tr>
+      {% for i in data %}
+      <tr>
+          <td>{{i.id}}</td>
+          <td>{{i.name}}</td>
+          <td>{{i.address}}</td>
+          <td>{{i.email}}</td>
+          <td>{{i.phone}}</td>
+          <td>{{i.student_class.name}}</td>
+          <td>{{i.student_class.created_at}}</td>
+          <td><a href="{% url 'edit-student-list' i.id %}">Edit</a> || <a href="{% url 'delete-student-list' i.id %}">Delete</a></td>
+      </tr>
+      {% endfor %}
+  </table>
 
 </body>
 </html>

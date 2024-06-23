@@ -10,4 +10,4 @@ class BroadwayStudentAdmin(admin.ModelAdmin):
 
 @admin.register(StudentClass)
 class StudentClassAdmin(admin.ModelAdmin):
-    list_display=['name', 'section', 'status', 'class_type', 'class_link']
+    list_display=['id', 'name', 'section', 'status', 'class_type', 'class_link']
