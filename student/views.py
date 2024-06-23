@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from student.models import BroadwayStudent, StudentClass
 from student.forms import StudentClassForm, StudentForm
+from django.views.generic.list import ListView
 # Create your views here.
 
 def fetch_student(request):
@@ -78,7 +79,7 @@ def create_student_class(request):
        return render(request, 'student/create.html', context)
 
 def edit_student_class(request,id):
-    student = StudentForm.objects.get(id=id)
+    student = BroadwayStudent.objects.get(id=id)
     form = StudentForm(instance=student)
     if request.method=='POST':
         form = StudentForm(request.POST ,request.FILES or None, instance=student)
@@ -95,5 +96,10 @@ def edit_student_class(request,id):
     return render(request,'student/edit.html',context)
 
 def delete_student_class(request, id):
-      student = StudentForm.objects.get(id=id).delete()
+      student = BroadwayStudent.objects.get(id=id).delete()
       return redirect('/student')
+
+class StudentClassView(ListView):
+      model = StudentClass
+      template_name = 'class/index.html'
+      context_object_name = 'data'
