@@ -23,5 +23,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     #path('student-data', fetch_student, name="fetch-data"),
     path('student/',include('student.urls')),
-    
+    path('user/',include('user.urls')),
 ]
