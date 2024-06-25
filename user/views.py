@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from user.form import Createuser
+from django.contrib.auth import authenticate, login
+
 
 # Create your views here.
 
@@ -13,17 +16,27 @@ def user_list(request):
     return render (request, 'user/index.html', context)
 
 def create_user(request):
-    form = UserCreationForm()
-    if request.method=='POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('/user')
-        else:
-            print(form.errors)
-
+    form = Createuser()
     context = {
                 "form": form
             }
 
     return render(request, 'user/create.html', context)
+
+def login_user(request):
+    form = AuthenticationForm()
+    if request.method == "POST":
+        form = AuthenticationForm(request.POST)
+        username = request.POST["username"]
+        password = request.POST["password"]
+        data = authenticate(username=username, password=password)
+        if data is not None:
+            login(request,data)
+            return redirect("/")
+
+    context = {"form": form}
+    return render(request, "user/login.html", context)
+
+def home(request):
+    return render(request,'user/home.html')
+
